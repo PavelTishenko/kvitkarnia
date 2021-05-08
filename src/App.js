@@ -1,13 +1,11 @@
 import React, {useEffect} from 'react';
-import {Route, Switch, Redirect} from 'react-router-dom';
-// Firebase
-import {auth, handleUserProfile} from './Firebase/utils';
+import {Route, Switch} from 'react-router-dom';
 // Layouts
 import MainLayout from './layouts/MainLayout';
 import HomePageLayout from './layouts/HomePageLayout';
 // Redux
-import {useDispatch, useSelector} from 'react-redux';
-import {setCurrentUser} from './redux/User/user.actions';
+import {useDispatch} from 'react-redux';
+import {checkUserSession} from './redux/User/user.actions';
 // hoc
 import WithAuth from './hoc/withAuth';
 // Pages
@@ -25,10 +23,7 @@ const App = (props) => {
     let authListener = null
     
     useEffect(() => {
-         
-        return () => {
-            authListener();
-        }
+         dispatch(checkUserSession());
     },[])
     return (
         <div className="App">

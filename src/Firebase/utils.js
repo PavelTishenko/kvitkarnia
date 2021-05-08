@@ -3,6 +3,7 @@ import 'firebase/firestore';
 import 'firebase/database';
 import 'firebase/auth';
 import {firebaseConfig} from './firebase';
+import userTypes from '../redux/User/user.types';
 
 firebase.initializeApp(firebaseConfig);
 
@@ -34,4 +35,13 @@ export const handleUserProfile = ({userAuth, additionalData}) => {
         }
     }
     return userRef;
+};
+
+export const getCurrentUser = () => {
+    return new Promise((res, rej) => {
+        const unsubscribe = auth.onAuthStateChanged(userAuth => {
+            unsubscribe();
+            res(userAuth);
+        }, rej);
+    })
 }

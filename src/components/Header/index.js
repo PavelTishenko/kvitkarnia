@@ -1,10 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {Link, useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './styles.scss';
 import Logo from './../../assets/transpLogo.png';
-import {auth} from '../../Firebase/utils';
-import { setCurrentUser } from '../../redux/User/user.actions';
+import { signOutUserStart } from '../../redux/User/user.actions';
 
 const Header = () =>  {
     // Redux hook
@@ -17,8 +16,7 @@ const Header = () =>  {
     const currentUser = useSelector(state => state.user.currentUser);
     
     const logOut = () => {
-        auth.signOut()
-            // .then(() => console.log()))
+        dispatch(signOutUserStart());
     }
     return (
         <header className="header">

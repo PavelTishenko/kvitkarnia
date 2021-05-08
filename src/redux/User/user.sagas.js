@@ -1,7 +1,7 @@
 import {takeLatest, all, call, put} from 'redux-saga/effects';
 import userTypes from './user.types';
-import {signInSuccess} from './user.actions';
-import {auth, handleUserProfile, GoogleProvider} from './../../Firebase/utils';
+import {signInSuccess, signOutUserSuccess} from './user.actions';
+import {auth, handleUserProfile, GoogleProvider, getCurrentUser} from './../../Firebase/utils';
 
 // put - dispatch an action into the store(non-blocking)
 // call - run method, Promise or other Saga (blocking)
@@ -10,6 +10,7 @@ import {auth, handleUserProfile, GoogleProvider} from './../../Firebase/utils';
 // takeLatest - takes every matching action and run the given saga, 
 // but cancels every previous 
 
+// worker
 export function* getSnapshotFromUserAuth(user, additionalData={}) {
     try {
         const userRef = yield call(handleUserProfile, { userAuth: user, additionalData });
@@ -24,7 +25,7 @@ export function* getSnapshotFromUserAuth(user, additionalData={}) {
         // console.log(error);
     }
 }
-
+// worker
 export function* emailSignIn({ payload: { email, password } }){
     try {
        const {user} = yield auth.signInWithEmailAndPassword(email, password);
@@ -35,11 +36,39 @@ export function* emailSignIn({ payload: { email, password } }){
         console.log(err);
     }
 }
-
+// watcher
 export function* onEmailSignInStart() {
     yield takeLatest(userTypes.EMAIL_SIGN_IN_STRAT, emailSignIn)
 }
 
-export default function* userSagas(){
-    yield all([call(onEmailSignInStart)])
+export function* isUserAuthenticated() {
+    try {
+        const userAuth = yield getCurrentUser();
+        if(!userAuth) return;
+        yield getSnapshotFromUserAuth(userAuth);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* onCheckUserSession() {
+    yield takeLatest(userTypes.CHECK_USER_SESSION, isUserAuthenticated);
+}
+
+export function* signOutUser() {
+    try {
+        yield auth.signOut();
+        yield put(signOutUserSuccess());
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+export function* onSignOutUserStart() {
+    yield takeLatest(userTypes.SIGN_OUT_USER_START, signOutUser)
+}
+
+
+export default function* userSagas() {
+    yield all([call(onEmailSignInStart), call(onCheckUserSession), call(onSignOutUserStart)])
 }
