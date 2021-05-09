@@ -5,16 +5,16 @@ import Button from '../Forms/Button';
 import AuthWrapper from '../AuthWraper';
 import { withRouter } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {singUpUser, resetAllAuthForms} from './../../redux/User/user.actions';
+import {signUpUserStart} from './../../redux/User/user.actions';
 
 const mapState = ({user}) => ({
-    signUpSuccess: user.signUpSuccess,
-    signUpError: user.signUpError
+    currentUser: user.currentUser,
+    userError: user.userError
 })
 
 const SignUp = ({history}) => {
     const dispatch = useDispatch();
-    const {signUpSuccess, signUpError} = useSelector(mapState);
+    const {userError, currentUser} = useSelector(mapState);
     const [initS, setInitS] = useState({
         displayName: '',
         email: '',
@@ -24,7 +24,7 @@ const SignUp = ({history}) => {
     })
 
     useEffect(() => {
-        if (signUpSuccess){
+        if (currentUser){
             setInitS({
                 displayName: '',
                 email: '',
@@ -32,19 +32,18 @@ const SignUp = ({history}) => {
                 confirmPassword: '',
                 errors: []
             })
-            dispatch(resetAllAuthForms());
             history.push('/');
         }
-    }, [signUpSuccess])
+    }, [currentUser])
 
     useEffect(() => {
-        if(Array.isArray(signUpError) && signUpError.length > 0) {
+        if(Array.isArray(userError) && userError.length > 0) {
             setInitS({
                 ...initS,
-                errors: signUpError
+                errors: userError
             })
         }
-    }, [signUpError])
+    }, [userError])
     
 
     const handleChange = (e) => {
@@ -57,7 +56,7 @@ const SignUp = ({history}) => {
     const handleFormSubmit = event => {
         event.preventDefault();
         const {displayName, email, password, confirmPassword, errors} = initS;
-        dispatch(singUpUser({displayName, email, password, confirmPassword}));
+        dispatch(signUpUserStart({displayName, email, password, confirmPassword}));
         setInitS({
             ...initS
         })

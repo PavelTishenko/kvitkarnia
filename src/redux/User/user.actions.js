@@ -10,7 +10,6 @@ export const emailSingInStart = userCredentials => {
 };
 
 export const signInSuccess = user => {
-    console.log(user);
     return {
         type: userTypes.SIGN_IN_SUCCES,
         payload: user
@@ -19,7 +18,7 @@ export const signInSuccess = user => {
 
 export const checkUserSession = () => ({
     type: userTypes.CHECK_USER_SESSION,
-})
+});
 
 export const signOutUserStart = () => ({
     type: userTypes.SIGN_OUT_USER_START
@@ -27,8 +26,22 @@ export const signOutUserStart = () => ({
 
 export const signOutUserSuccess = () => ({
     type: userTypes.SIGN_OUT_USER_SUCCESS
-})
+});
 
+export const signUpUserStart = (userCredentials) => {
+    console.log('WORK');
+    return {
+        type: userTypes.SIGN_UP_USER_START,
+        payload: userCredentials
+    }
+};
+
+export const userError = (err) => ({
+    type: userTypes.USER_ERROR,
+    payload: err
+});
+
+// OLD
 export const setCurrentUser = user => ({
     type: userTypes.SET_CURRENT_USER,
     payload: user
