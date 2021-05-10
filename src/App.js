@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 import {Route, Switch} from 'react-router-dom';
+// Components
+import AdminToolBar from './components/AdminToolbar';
 // Layouts
 import MainLayout from './layouts/MainLayout';
 import HomePageLayout from './layouts/HomePageLayout';
@@ -29,6 +31,7 @@ const App = (props) => {
     },[])
     return (
         <div className="App">
+            <AdminToolBar />
             <Switch>
                 <Route exact path='/' render={() => (
                     <HomePageLayout>
