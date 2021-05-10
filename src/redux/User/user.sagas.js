@@ -81,6 +81,26 @@ export function* onUserSignUpStart() {
     yield takeLatest(userTypes.SIGN_UP_USER_START, userSignUp)
 }
 
+export function* googleSignIn() {
+    try {
+        const {user} = yield auth.signInWithPopup(GoogleProvider);
+        yield getSnapshotFromUserAuth(user); 
+
+            // .then(() => {
+            //     dispatch({ 
+            //         type: userTypes.SIGN_IN_SUCCES, 
+            //         payload: true
+            //     })
+            // })
+    } catch (err) {
+        // console.log(err);
+    }
+}
+
+export function* onGoogleSignInStart() {
+    yield takeLatest(userTypes.GOOGLE_SIGN_IN_START, googleSignIn)
+}
+
 export function* isUserAuthenticated() {
     try {
         const userAuth = yield getCurrentUser();
@@ -115,6 +135,7 @@ export default function* userSagas() {
         call(onEmailSignInStart), 
         call(onCheckUserSession), 
         call(onSignOutUserStart),
-        call(onResetPasswordStart)
+        call(onResetPasswordStart),
+        call(onGoogleSignInStart)
     ])
 }

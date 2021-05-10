@@ -14,10 +14,11 @@ const userReducer = (state = INIT_STATE, action) => {
                 currentUser: action.payload,
                 userErrors: []
             }
+        case userTypes.RESET_USER_STATE:
         case userTypes.SIGN_OUT_USER_SUCCESS:
             return {
                 ...state,
-                currentUser: null
+                ...INIT_STATE
             }
         case userTypes.USER_ERROR:
             return {
