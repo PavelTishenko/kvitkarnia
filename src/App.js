@@ -8,12 +8,14 @@ import {useDispatch} from 'react-redux';
 import {checkUserSession} from './redux/User/user.actions';
 // hoc
 import WithAuth from './hoc/withAuth';
+import WithAdminAuth from './hoc/withAdminAuth';
 // Pages
 import Homepage from './Pages/HomePage';
 import Registration from './Pages/Registration';
 import Login  from './Pages/LoginPage';
 import Recovery from './Pages/Recovery';
 import Dashboard from './Pages/Dashboard';
+import Admin from './Pages/Admin';
 // Styles
 import './default.scss';
 
@@ -63,6 +65,18 @@ const App = (props) => {
                                     <Dashboard />
                                 </MainLayout>
                             </WithAuth>
+                        )
+                    }
+                />
+                <Route
+                    path='/admin'
+                    render={
+                        () => (
+                            <WithAdminAuth>
+                                <MainLayout>
+                                    <Admin />
+                                </MainLayout>
+                            </WithAdminAuth>
                         )
                     }
                 />

@@ -23,11 +23,14 @@ export const handleUserProfile = ({userAuth, additionalData}) => {
     if(!snapshot.exists) {
         const {displayName, email} = userAuth;
         const timestamp = new Date();
+        const userRole = ['user'];
+
         try{
              userRef.set({
                 displayName,
                 email,
                 createDate: timestamp,
+                userRole,
                 ...additionalData
             })
         } catch (err) {
