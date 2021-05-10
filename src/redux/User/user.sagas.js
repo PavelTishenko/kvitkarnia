@@ -1,8 +1,8 @@
 import {takeLatest, all, call, put} from 'redux-saga/effects';
 import userTypes from './user.types';
-import {signInSuccess, signOutUserSuccess, userError} from './user.actions';
+import {signInSuccess, signOutUserSuccess, resetPasswordSucces, userError} from './user.actions';
 import {auth, handleUserProfile, GoogleProvider, getCurrentUser} from './../../Firebase/utils';
-
+import {handleResetPasswordAPI} from './user.helper';
 // put - dispatch an action into the store(non-blocking)
 // call - run method, Promise or other Saga (blocking)
 // takeEvery - run multiple sagas. When one of the sagas finishes,
@@ -53,7 +53,6 @@ export function* userSignUp({payload: {
         return;
     }
     try {
-        console.log('norm');
         const {user} = yield auth.createUserWithEmailAndPassword(email, password);
         // yield call(handleUserProfile, {userAuth: user, additionalData: { displayName }});
         const additionalData = { displayName };
@@ -62,6 +61,20 @@ export function* userSignUp({payload: {
         // console.log(err);
     }
 
+}
+
+export function* resetPassword({payload: {email}}){
+    try {
+        //  wait when a Promise give resolve
+        yield call(handleResetPasswordAPI, email)
+        yield put(resetPasswordSucces())
+    } catch (err) {
+        yield put(userError(err));
+    }
+}
+
+export function* onResetPasswordStart() {
+    yield takeLatest(userTypes.RESET_PASSWORD_START, resetPassword);
 }
 
 export function* onUserSignUpStart() {
@@ -101,6 +114,7 @@ export default function* userSagas() {
         call(onUserSignUpStart),
         call(onEmailSignInStart), 
         call(onCheckUserSession), 
-        call(onSignOutUserStart)
+        call(onSignOutUserStart),
+        call(onResetPasswordStart)
     ])
 }

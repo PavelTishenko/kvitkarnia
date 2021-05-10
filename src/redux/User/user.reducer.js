@@ -2,6 +2,7 @@ import userTypes from './user.types';
 
 const INIT_STATE = {
     currentUser: null,
+    resetPasswordSuccess: false,
     userErrors: []
 };
 
@@ -22,6 +23,11 @@ const userReducer = (state = INIT_STATE, action) => {
             return {
                 ...state,
                 userErrors: action.payload
+            }
+        case userTypes.RESET_PASSWORD_SUCCESS:
+            return {
+                ...state,
+                resetPasswordSuccess: action.payload
             }
         default: 
             return state;

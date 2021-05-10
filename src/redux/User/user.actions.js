@@ -41,6 +41,16 @@ export const userError = (err) => ({
     payload: err
 });
 
+export const resetPasswordStart = (userCredentials) => ({
+    type: userTypes.RESET_PASSWORD_START,
+    payload: userCredentials
+});
+
+export const resetPasswordSucces = () => ({
+    type: userTypes.RESET_PASSWORD_SUCCESS,
+    payload: true
+})
+
 // OLD
 export const setCurrentUser = user => ({
     type: userTypes.SET_CURRENT_USER,
