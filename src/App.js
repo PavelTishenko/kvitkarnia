@@ -5,6 +5,7 @@ import AdminToolBar from './components/AdminToolbar';
 // Layouts
 import MainLayout from './layouts/MainLayout';
 import HomePageLayout from './layouts/HomePageLayout';
+import AdminLayout from './layouts/AdminLayout';
 // Redux
 import {useDispatch} from 'react-redux';
 import {checkUserSession} from './redux/User/user.actions';
@@ -76,9 +77,10 @@ const App = (props) => {
                     render={
                         () => (
                             <WithAdminAuth>
-                                <MainLayout>
+                                
+                                <AdminLayout>
                                     <Admin />
-                                </MainLayout>
+                                </AdminLayout>
                             </WithAdminAuth>
                         )
                     }
