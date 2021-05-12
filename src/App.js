@@ -77,7 +77,6 @@ const App = (props) => {
                     render={
                         () => (
                             <WithAdminAuth>
-                                
                                 <AdminLayout>
                                     <Admin />
                                 </AdminLayout>

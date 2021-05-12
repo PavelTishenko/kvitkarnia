@@ -22,7 +22,7 @@ const AdminLayout = props => {
           <VerticalNav>
             <ul>
               <li>
-                <Link to="/admin">
+                <Link to="/">
                   Home
                 </Link>
               </li>

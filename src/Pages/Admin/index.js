@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import {addProductStart, fetchProductsStart} from './../../redux/Products/products.actions';
 // components
 import Modal from '../../components/Modal';
 import Button from '../../components/Forms/Button';
@@ -8,14 +9,23 @@ import FormSelect from '../../components/Forms/FormSelect';
 import {CKEditor} from '@ckeditor/ckeditor5-react';
 import './styles.scss';
 
+const mapState = ({productsData}) => ({
+  products: productsData.products
+});
+
 const Admin = props => {
     const dispatch = useDispatch();
+    const {products} = useSelector(mapState);
     const [hideModal, setHideModal] = useState(true);
     const [productCategory, setProductCategory] = useState('mens');
     const [productName, setProductName] = useState('');
     const [productThumbnail, setProductThumbnail] = useState('');
     const [productPrice, setProductPrice] = useState(0);
     const [productDesc, setProductDesc] = useState('');
+
+    useEffect(()=>{
+      dispatch(fetchProductsStart());
+    },[])
 
     const toggleModal = () => setHideModal(!hideModal);
 
@@ -25,8 +35,14 @@ const Admin = props => {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        console.log('work');
+      e.preventDefault();
+      console.log('add new product');
+      dispatch(addProductStart({
+        productCategory,
+        productName,
+        productThumbnail,
+        productPrice
+      }))
     }
 
     return (

@@ -1,6 +1,6 @@
 import {combineReducers} from 'redux';
 import userReducer from '../User/user.reducer';
-
+import productsReducer from '../Products/products.reducer';
 // const initState = {
 //     imagesPath: []
 // }
@@ -17,7 +17,8 @@ import userReducer from '../User/user.reducer';
 //     }
 // };
 const rootReducer = combineReducers ({
-    user: userReducer
+    user: userReducer,
+    productsData: productsReducer
 })
 
 export default rootReducer;

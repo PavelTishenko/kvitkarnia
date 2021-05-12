@@ -16,12 +16,8 @@ const VerticalNav = ({ children }) => {
 
   return (
     <div className="verticalNav">
-
       <UserProfile {...configUserProfile} />
-
-      <div className="menu">
         {children}
-      </div>
     </div>
   );
 }
