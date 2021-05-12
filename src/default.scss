@@ -70,5 +70,32 @@ a, a:hover {
 
 .adminLayout {
     height: calc(100% - 6.5rem - 5.8rem - 3.6rem);
-  }
+}
+
+@media (max-width: 768px) { 
+    .controlPanel{
+        .sidebar{
+            display: none;
+        }
+        .content{
+            width: 344px;
+            position: relative;
+            right: 237px;
+            .admin{
+                display: flex;
+                flex-wrap: wrap;
+                align-content: space-between;
+                .callToActions{
+                    display: flex;
+                    width: 100%;
+                    padding: 0px;
+                    margin: 0px auto;
+                    align-items: center;
+                    justify-content: center;
+                }
+            }
+        }
+        
+    }
+}
 
