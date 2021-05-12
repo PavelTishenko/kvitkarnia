@@ -1,5 +1,9 @@
 .admin {
-    padding: 0 320px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: space-between;
+    align-items: center;
   
     .callToActions {
       display: inline-block;
@@ -24,23 +28,22 @@
   }
   
   .manageProducts {
-  
     h1 {
       margin-top: 1.5rem;
     }
-  
     table.results {
       tr {
-  
+        cursor: pointer;
         &:nth-child(even) {
           background-color: #d3d3d3;
         }
-  
         .thumb {
           width: 15.0rem;
           margin: 0 auto;
         }
-  
+        &:hover {
+          background-color: #81c784;
+        }
       }
     }
   }

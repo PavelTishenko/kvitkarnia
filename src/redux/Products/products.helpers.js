@@ -30,3 +30,14 @@ export const handleFetchProducts = () => {
             .catch(err => reject(err))
     })
 }
+
+export const handleDeleteProduct = documentID => {
+    return new Promise((resolve, reject) => {
+        firestore
+            .collection('products')
+            .doc(documentID)
+            .delete()
+            .then(() => resolve())
+            .catch(err => reject(err))
+    })
+}
