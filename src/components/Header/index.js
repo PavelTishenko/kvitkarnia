@@ -31,6 +31,20 @@ const Header = () =>  {
                         <img src={Logo}  alt="LOGO" height={150} width={150}/>
                     </Link>
                 </div>
+                <nav className="navM">
+                    <ul>
+                        <li>
+                            <Link to="/">
+                                На головну
+                            </Link>
+                        </li>
+                        <li>
+                            <Link to="/search">
+                                Резервувати
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
                 <div className='callToAction'>   
                     {currentUser && (
                         <ul>
@@ -73,6 +87,16 @@ const Header = () =>  {
                     <div className={menuOpen ? 'list-menu open' : 'list-menu'}>
                         {currentUser && (
                                 <ul>
+                                    <li>
+                                        <Link to="/">
+                                            На головну
+                                        </Link>
+                                    </li>
+                                    <li>
+                                        <Link to="/search">
+                                            Резервувати
+                                        </Link>
+                                    </li>
                                     <li>
                                         <Link to='/dashboard'>
                                             My Account

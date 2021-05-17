@@ -25,6 +25,40 @@
         align-items: flex-end;
     }
 
+     nav {
+        display: block;
+        width: 100%;
+        height: 100%;
+        padding: 0;
+        margin: 0;
+  
+        ul, ul li {
+          padding: 0;
+          margin: 0;
+          height: 100%;
+        }
+  
+        ul {
+          text-align: center;
+  
+          li {
+            display: inline-block;
+            margin: 0 1rem;
+            list-style-type: none;
+  
+            a {
+              font-size: 1.8rem;
+              line-height: 15rem;
+              vertical-align: middle;
+              color: green;
+              text-decoration: none;
+              text-transform: uppercase;
+              cursor: pointer;
+            }
+          }
+        }
+      }
+
     .callToAction {
         position: absolute;
         top: 50%; right: 10px;
@@ -75,15 +109,18 @@
 
 
 @media (max-width: 768px){
+    .header_wrap{
+        .navM {
+            display: none;
+        }
+    }
     .header-logo {
         display: none;
     }
     .callToAction{
         display: none;
     }
-    nav{
-        height: 100%;
-    }
+    
     .header-logo-hide {
         display: block;
         position: absolute;
