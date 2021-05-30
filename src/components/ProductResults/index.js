@@ -4,6 +4,7 @@ import {useHistory, useParams} from 'react-router-dom';
 import {fetchProductsStart} from '../../redux/Products/products.actions';
 import Product from './Product';
 import FormSelect from '../Forms/FormSelect';
+import LoadMore from '../LoadMore';
 import './styles.scss';
 
 const mapState = ({productsData}) => ({
@@ -15,7 +16,6 @@ const ProductResults = ({}) => {
     const history = useHistory();
     const {filterType} = useParams();
     const {products} = useSelector(mapState);
-
     useEffect(() => {
         dispatch(fetchProductsStart({filterType}));
     },[filterType]);
@@ -54,6 +54,15 @@ const ProductResults = ({}) => {
         ],
         handleChange: handleFilter
     }
+
+    const handleLoadMore = () => {
+
+    },
+
+    const configLoadMore = {
+        onLoadMoreEvent: handleLoadMore ,
+    },
+
     return (
         <div className="products">
             <h1>
@@ -74,6 +83,7 @@ const ProductResults = ({}) => {
                     )
                 })}
             </div>
+            <LoadMore {...configLoadMore}/>
         </div>
     );
 };

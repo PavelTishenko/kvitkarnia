@@ -35,7 +35,7 @@ export function* fetchProducts({payload: {
 }}){
     try {
         const products = yield handleFetchProducts({filterType});
-        yield put(setProducts(products))
+        yield put(setProducts(products));
     } catch (error) {
         console.log(error);
     }
