@@ -16,6 +16,7 @@ const ProductResults = ({}) => {
     const history = useHistory();
     const {filterType} = useParams();
     const {products} = useSelector(mapState);
+    const {data, queryDoc, isLastPage} = products;
     useEffect(() => {
         dispatch(fetchProductsStart({filterType}));
     },[filterType]);
@@ -25,8 +26,8 @@ const ProductResults = ({}) => {
         history.push(`/search/${nextFilter}`)
     };
 
-    if (!Array.isArray(products)) return null;
-    if (products.length < 1) {
+    if (!Array.isArray(data)) return null;
+    if (data.length < 1) {
         return (
             <div className="products">
                 <p>
@@ -56,12 +57,17 @@ const ProductResults = ({}) => {
     }
 
     const handleLoadMore = () => {
+        dispatch(fetchProductsStart({
+            filterType, 
+            startAfterDoc: queryDoc,
+            persistProducts: data
+        }));
 
-    },
+    };
 
     const configLoadMore = {
         onLoadMoreEvent: handleLoadMore ,
-    },
+    };
 
     return (
         <div className="products">
@@ -70,7 +76,7 @@ const ProductResults = ({}) => {
             </h1>
             <FormSelect {...configFilters}/>
             <div className="productsResults">
-                {products.map((product, pos) => {
+                {data.map((product, pos) => {
                     const {productThumbnail, productName, productPrice} = product;
                     if(!productThumbnail || !productName || typeof productPrice === undefined) return null;
                     const configProduct = {
@@ -83,7 +89,9 @@ const ProductResults = ({}) => {
                     )
                 })}
             </div>
-            <LoadMore {...configLoadMore}/>
+            {!isLastPage && (
+                <LoadMore {...configLoadMore}/>
+            )}
         </div>
     );
 };
