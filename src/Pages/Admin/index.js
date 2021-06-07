@@ -6,8 +6,8 @@ import Modal from '../../components/Modal';
 import Button from '../../components/Forms/Button';
 import FormInput from '../../components/Forms/FormInput';
 import FormSelect from '../../components/Forms/FormSelect';
-import {CKEditor} from '@ckeditor/ckeditor5-react';
 import LoadMore from '../../components/LoadMore';
+import {CKEditor} from '@ckeditor/ckeditor5-react';
 import './styles.scss';
 
 const mapState = ({productsData}) => ({
@@ -122,9 +122,10 @@ const Admin = props => {
                         value={productPrice}
                         handleChange={e => setProductPrice(e.target.value)}
                       />
+                      {/* <span>CKEEDITOR</span>
                       <CKEditor
                         onChange={evt => setProductDesc(evt.editor.getData())}
-                      />
+                      /> */}
 
                       <br/>
 
@@ -185,7 +186,7 @@ const Admin = props => {
                   </tr>
                   <tr>
                     <td>
-                        <table border="0" cellPaddiing="10" cellSpacing="0">
+                        <table border="0" cellPadding="10" cellSpacing="0">
                             <tbody>
                                 <tr>
                                     <td>

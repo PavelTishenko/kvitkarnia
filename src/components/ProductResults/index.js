@@ -80,9 +80,7 @@ const ProductResults = ({}) => {
                     const {productThumbnail, productName, productPrice} = product;
                     if(!productThumbnail || !productName || typeof productPrice === undefined) return null;
                     const configProduct = {
-                        productThumbnail, 
-                        productName, 
-                        productPrice
+                        ...product
                     }
                     return(
                         <Product {...configProduct} key={pos}/>
