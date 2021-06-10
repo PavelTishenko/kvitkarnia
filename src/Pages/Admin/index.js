@@ -6,7 +6,6 @@ import Modal from '../../components/Modal';
 import Button from '../../components/Forms/Button';
 import FormInput from '../../components/Forms/FormInput';
 import FormSelect from '../../components/Forms/FormSelect';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import LoadMore from '../../components/LoadMore';
 import {CKEditor} from '@ckeditor/ckeditor5-react';
