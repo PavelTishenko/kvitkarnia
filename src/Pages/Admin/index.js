@@ -6,7 +6,8 @@ import Modal from '../../components/Modal';
 import Button from '../../components/Forms/Button';
 import FormInput from '../../components/Forms/FormInput';
 import FormSelect from '../../components/Forms/FormSelect';
-import {CKEditor} from '@ckeditor/ckeditor5-react';
+import { CKEditor } from '@ckeditor/ckeditor5-react';
+import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import LoadMore from '../../components/LoadMore';
 import './styles.scss';
 
@@ -122,10 +123,12 @@ const Admin = props => {
                         value={productPrice}
                         handleChange={e => setProductPrice(e.target.value)}
                       />
-                      <CKEditor
-                        onChange={evt => setProductDesc(evt.editor.getData())}
-                      />
-
+                     <CKEditor
+                      disabled={true}
+                      editor={ClassicEditor}
+                      onChange={evt => setProductDesc(evt.editor.getData())}
+                     />
+                      some
                       <br/>
 
                       <Button type="submit">
@@ -185,7 +188,7 @@ const Admin = props => {
                   </tr>
                   <tr>
                     <td>
-                        <table border="0" cellPaddiing="10" cellSpacing="0">
+                        <table border="0" cellPadding="10" cellSpacing="0">
                             <tbody>
                                 <tr>
                                     <td>
