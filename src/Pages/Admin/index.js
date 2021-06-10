@@ -124,11 +124,10 @@ const Admin = props => {
                         handleChange={e => setProductPrice(e.target.value)}
                       />
                      <CKEditor
-                      disabled={true}
+                      disabled={false}
                       editor={ClassicEditor}
-                      onChange={evt => setProductDesc(evt.editor.getData())}
+                      onChange={(evt, editor) => setProductDesc(editor.getData())}
                      />
-                      some
                       <br/>
 
                       <Button type="submit">
